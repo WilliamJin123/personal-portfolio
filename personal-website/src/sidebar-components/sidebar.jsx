@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { iconList } from "../assets/icons"
 import { AnimatePresence, motion } from "framer-motion"
+import { useExpanded } from "../expanded_context"
 const expandSvg = () => (<svg className="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     <path d="M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z" /></svg>)
 
@@ -13,7 +14,7 @@ const enterVariants = {
 }
 export default function Sidebar() {
 
-    const [expanded, setExpanded] = useState(true)
+    const { expanded, toggleExpanded } = useExpanded()
     const [selected, setSelected] = useState(0)
     return (
         <motion.div className="sidebar"
@@ -33,8 +34,8 @@ export default function Sidebar() {
                     handleClick={() => setSelected(index)} selected={selected === index} key={index} icon={item.icon} desc={item.desc} link={item.link} expanded={expanded} />
                 ))}
             </ul>
-            <button className="expand-btn" onClick={() => setExpanded(!expanded)}>
-                <motion.span animate={{ rotate: expanded ? 0 : '-180deg' }} transition={{ delay: 0.2, duration: 0.1 }}>{expandSvg()}</motion.span>
+            <button className="expand-btn" onClick={toggleExpanded}>
+                <motion.span animate={{ rotate: expanded ? '-180deg': 0 }} transition={{ delay: 0.2, duration: 0.1 }}>{expandSvg()}</motion.span>
                 <AnimatePresence >
                     {expanded && (
                         <motion.span
