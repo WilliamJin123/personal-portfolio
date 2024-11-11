@@ -10,12 +10,13 @@ const expandSvg = () => (<svg className="arrow" xmlns="http://www.w3.org/2000/sv
 
 const enterVariants = {
     hidden: { y: 10, opacity: 0 },
-    visible: { y: 0, opacity: 1 }
+    visible: { y: 0, opacity: 1 },
+    exit: { y: -5, opacity: 0, transition: { duration: 0.1, delay:0.125 } },
 }
 export default function Sidebar() {
 
     const { expanded, toggleExpanded } = useExpanded()
-    const [selected, setSelected] = useState(0)
+    const [selected, setSelected] = useState(iconList.findIndex(item => item.link === location.pathname))
     return (
         <motion.div className="sidebar"
             variants={{
@@ -36,11 +37,13 @@ export default function Sidebar() {
             </ul>
             <button className="expand-btn" onClick={toggleExpanded}>
                 <motion.span animate={{ rotate: expanded ? '-180deg': 0 }} transition={{ delay: 0.2, duration: 0.1 }}>{expandSvg()}</motion.span>
-                <AnimatePresence >
+                <AnimatePresence>
                     {expanded && (
                         <motion.span
                             variants={enterVariants}
-                            exit={{ y: -5, opacity: 0, transition: { duration: 0.1 } }}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
                             transition={{ delay: 0.2 }}
                         >Hide</motion.span>
                     )}
@@ -65,11 +68,17 @@ function Tab({ icon, desc, link, expanded, selected, handleClick}) {
                 transition={{ delay: 0.125 }}
             >
                 <motion.span layout className="icon">{icon()}</motion.span>
-                    <motion.span className="desc" 
-                        variants={enterVariants}
-                        transition={{delay: 0.25}}
-                    >{desc}</motion.span>
 
+                <AnimatePresence>
+                     {expanded && (<motion.span className="desc" 
+                        variants={enterVariants}
+                        transition={{delay: 0.2}}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                    >{desc}</motion.span>)}
+                </AnimatePresence>
+                   
             </motion.li>
 
         </Link>

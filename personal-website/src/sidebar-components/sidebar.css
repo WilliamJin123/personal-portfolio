@@ -92,6 +92,7 @@
         align-items: center;
         font-size: var(--font-size);
         margin: 0 0 0 0.75vw;
+        transform-origin: 1vw 0.5vw;
         
     }
 
