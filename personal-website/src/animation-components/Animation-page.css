@@ -1,0 +1,80 @@
+@import url(../App.css);
+:root{
+    --padding: 0%;
+}
+.animations-main{
+    width: 100%;
+    height: fit-content;
+    background-color: var(--dark-gray);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    padding: 50vh 0;
+    row-gap: 50vh;
+}
+
+.animation-menu{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 2rem 0 ;
+}
+.animation-menu h1{
+    display: flex;
+    align-items: flex-start;
+    font-size: 2vw;
+}
+.animation-menu svg{
+    width: 1.5vw;
+    height: 1.5vw;
+    padding: 0 0.5rem;
+}
+.animation-menu button{
+    font-size: var(--font-size);
+    padding-left: 0;
+}
+.options{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+
+.animation-component{
+    
+    width: 85%;
+    height: fit-content;
+    padding: 0 var(--padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.animation-window{
+    width: 100%;
+    position: relative;
+    border: 1px solid var(--border-gray);
+}
+
+.code-window{
+    width: 100%;
+    background-color: green;
+    position: relative;
+}
+.hidden{
+    z-index: -10;
+    position: absolute;
+    
+    
+}
+.visible{
+    z-index: 10;
+    position: relative;
+}
