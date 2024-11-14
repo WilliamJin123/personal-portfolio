@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useScroll } from "framer-motion"
+import { AnimatePresence, motion, useScroll } from "motion/react"
 import "./img-slideshow.css"
 import { images } from "./img-list"
 import { useState, useEffect} from "react";

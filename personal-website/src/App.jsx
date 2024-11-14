@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense } from 'react'
-import Sidebar from './sidebar-components/sidebar'
+import Sidebar from './sidebar-components/Sidebar'
 import './App.css'
 import { Routes, Route, } from 'react-router-dom'
 
