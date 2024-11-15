@@ -23,8 +23,7 @@ function Animation({ children, code, animation }) {
     useEffect(() => {
         const handleResize = () => {
             if (animRef.current) {
-                console.log(animRef.current.offsetHeight)
-                console.log(animRef.current.offsetWidth)
+                
                 const width = animRef.current.offsetWidth
                 const height = animRef.current.offsetHeight
                 setDims([width, height])

@@ -5,8 +5,11 @@
   --hover: #403f3f;
   --border-gray: #919090;
   --selected: #c9535b;
+  --selected-gradient: #7a1b21;
+  --default-gradient: #e3323e;
   --font-size: calc(0.5rem + 0.5vw);
   --svg-size: calc(0.25vw + 1.5rem);
+
 }
 
 html,
@@ -22,8 +25,6 @@ body {
   overflow-x: hidden;
 }
 svg{
-  stroke: var(--white);
-  fill:"none";
   width: var(--svg-size);
   height: var(--svg-size);
 }

@@ -1,5 +1,5 @@
 import "./sidebar.css"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect} from "react"
 import { Link, useLocation } from "react-router-dom"
 import { iconList } from "./icons"
 import { AnimatePresence, motion } from "motion/react"
@@ -32,7 +32,7 @@ export default function Sidebar() {
 
                     <Tab
 
-                        handleClick={() => setSelected(index)} selected={selected === index} key={index} icon={item.icon} desc={item.desc} link={item.link} expanded={expanded} />
+                        handleClick={() => setSelected(index)} selected={selected === index} key={index} icon={item.icon} desc={item.desc} link={item.link} expanded={expanded} index={index} />
                 ))}
             </ul>
             <button className="expand-btn" onClick={toggleExpanded}>
@@ -54,12 +54,31 @@ export default function Sidebar() {
     )
 }
 
-function Tab({ icon, desc, link, expanded, selected, handleClick }) {
+import { handleMouseEnter, handleMouseLeave, handleMouseMove } from "../custom-svgs/svg-mouse-handlers"
 
+function Tab({ icon, desc, link, expanded, selected, handleClick, index }) {
+    const tabRef = useRef(null)
+    const svgRef = useRef(null)
+    const [onTab, setOnTab] = useState(false)
+    const [percentX, setPercentX] = useState(0)
+    const [percentY, setPercentY] = useState(0)
+    const [svgWidth, setSvgWidth] = useState(0)
+    const [svgHeight, setSvgHeight] = useState(0)
+    useEffect(() => {
+        if (svgRef.current) {
+            // Get SVG's width and height after render
+            const rect = svgRef.current.getBoundingClientRect()
+
+            setSvgWidth(rect.width)
+            setSvgHeight(rect.height)
+            console.log(svgHeight)
+        }
+    }, [expanded])
+
+    
     return (
-        <Link to={link} onClick={handleClick} >
-            <SvgHover >
-            <motion.li layout className={`tab ${selected ? "selected" : ""}`} 
+        <Link to={link} onClick={handleClick}>
+            <motion.li layout className={`tab ${selected ? "selected" : ""}`} ref={tabRef}
                 variants={{
                     hidden: { width: '3vw' },
                     visible: { width: '15vw' }
@@ -67,9 +86,18 @@ function Tab({ icon, desc, link, expanded, selected, handleClick }) {
                 initial="hidden"
                 animate={expanded ? "visible" : "hidden"}
                 transition={{ delay: 0.125 }}
+                onMouseEnter={() => handleMouseEnter(setOnTab)}
+                onMouseLeave={() => handleMouseLeave(setOnTab)}
+                onMouseMove={(e) => handleMouseMove(e, onTab, setPercentX, setPercentY, tabRef, svgWidth, svgHeight)}
+
             >
                 
-                    <motion.span layout className="icon">{icon()}</motion.span>
+                    <motion.span layout className="icon">
+                        <SvgHover divRef={tabRef} index={index} percentX={percentX} percentY={percentY} onTab={onTab} selected={selected} svgRef={svgRef}>
+                            {icon()}
+                        </SvgHover>
+                        
+                        </motion.span>
 
                     <AnimatePresence>
                         {expanded && (<motion.span className="desc"
@@ -83,7 +111,6 @@ function Tab({ icon, desc, link, expanded, selected, handleClick }) {
 
 
             </motion.li>
-            </SvgHover>
         </Link>
     )
 } 
