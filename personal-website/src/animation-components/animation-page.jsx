@@ -3,6 +3,8 @@ import { useState, useRef, useEffect } from "react"
 import "./Animation-page.css"
 import Slideshow from "./img-slideshow"
 import { AnimationSvgs } from "./Animation-svgs"
+import SvgHover from "../custom-svgs/svg-hover"
+import { handleMouseEnter, handleMouseLeave, handleMouseMove } from "../custom-svgs/svg-mouse-handlers"
 export default function Animations() {
 
 
@@ -33,13 +35,61 @@ function Animation({ children, code, animation }) {
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [])
+
+
+    const eyeRef = useRef(null)
+    const eyeSvgRef = useRef(null)
+    const [onEye, setOnEye] = useState(false)
+    const [eyeDim, setEyeDim] = useState([])
+    const [eyePercentX, setEyePercentX] = useState(0)
+    const [eyePercentY, setEyePercentY] = useState(0)
+    const codeRef = useRef(null)
+    const codeSvgRef = useRef(null)
+    const [onCode, setOnCode] = useState(false)
+    const [codeDim, setCodeDim] = useState([])
+    const [codePercentX, setCodePercentX] = useState(0)
+    const [codePercentY, setCodePercentY] = useState(0)
+    useEffect(() => {
+        if (eyeSvgRef.current) {
+            // Get SVG's width and height after render
+            const rect = eyeSvgRef.current.getBoundingClientRect()
+
+            setEyeDim([rect.width, rect.height])
+        }
+    }, [eyeRef])
+    useEffect(() => {
+        if (codeSvgRef.current) {
+            // Get SVG's width and height after render
+            const rect = codeSvgRef.current.getBoundingClientRect()
+
+            setCodeDim([rect.width, rect.height])
+        }
+    }, [codeRef])
     return (
         <div className="animation-component">
             <div className="animation-menu">
                 <h1>Image Slider</h1>
                 <div className="options">
-                    <button className="border-right" onClick={() => setShowAnim(true)}> {AnimationSvgs.eyeSvg()} View</button>
-                    <button onClick={() => setShowAnim(false)}> {AnimationSvgs.codeSvg()} Code</button>
+                    <button className="border-right" onClick={() => setShowAnim(true)} ref={eyeRef}
+                        onMouseEnter={() => handleMouseEnter(setOnEye)}
+                        onMouseLeave={() => handleMouseLeave(setOnEye)}
+                        onMouseMove={(e) => handleMouseMove(e, onEye, setEyePercentX, setEyePercentY, eyeRef, eyeDim[0], eyeDim[1])}
+                        > 
+                        <SvgHover
+                            divRef={eyeRef} index="Eye" percentX={eyePercentX} percentY={eyePercentY} onTab={onEye} selected={showAnim} svgRef={eyeSvgRef}
+                        >
+                            {AnimationSvgs.eyeSvg()} 
+                        </SvgHover>
+                        <span className="text">View</span></button>
+                    <button onClick={() => setShowAnim(false)} ref={codeRef}
+                        onMouseEnter={() => handleMouseEnter(setOnCode)}
+                        onMouseLeave={() => handleMouseLeave(setOnCode)}
+                        onMouseMove={(e) => handleMouseMove(e, onCode, setCodePercentX, setCodePercentY, codeRef, codeDim[0], codeDim[1])}
+                        > 
+                        <SvgHover
+                            divRef={codeRef} index="Code" percentX={codePercentX} percentY={codePercentY} onTab={onCode} selected={!showAnim} svgRef={codeSvgRef}
+                        >{AnimationSvgs.codeSvg()}</SvgHover> 
+                        <span className="text">Code</span></button>
                 </div>
             </div>
             <div className={`animation-window ${!showAnim ? 'hidden' : 'visible'}`} ref={animRef}>

@@ -28,19 +28,26 @@
     font-size: 2vw;
 }
 .animation-menu svg{
-    width: 1.5vw;
-    height: 1.5vw;
-    padding: 0 0.5rem;
+    width: 2vw;
+    height: 2vw;
 }
 .animation-menu button{
     font-size: var(--font-size);
-    padding-left: 0;
+    padding-left: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .options{
     display:flex;
     align-items: center;
     justify-content: center;
 
+}
+
+.text{
+    padding: 0 0.5rem;
 }
 
 

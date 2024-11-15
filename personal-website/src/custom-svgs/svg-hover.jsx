@@ -24,16 +24,16 @@ export default function SvgHover({ children, divRef, index, percentX, percentY, 
     const adjustedPercentY = percentY * adjust
 
     return (
-        <div className="svg-div" ref={svgRef}>
+        <div className="svg-div" >
 
 
-            <svg xmlns="http://www.w3.org/2000/svg" className="svg-to-hover" >
+            <svg xmlns="http://www.w3.org/2000/svg" className="svg-to-hover" ref={svgRef}>
                 <defs>
                     <radialGradient
                         id={`hoverGradient${index}`}
                         key={index}
                         gradientUnits="userSpaceOnUse"
-                        r={`${adjust*50}%`}
+                        r={`${adjust*100}%`}
                         viewBox="0 0 24 24"
                         cx={`${adjustedPercentX}%`}
                         cy={`${adjustedPercentY}%`}

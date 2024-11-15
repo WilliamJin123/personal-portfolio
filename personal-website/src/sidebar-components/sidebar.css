@@ -40,7 +40,7 @@
     }
 
     .selected{
-        background-color: #c9535b;
+        background-color: var(--selected);
     }
 
     .tab:not(.selected):hover {

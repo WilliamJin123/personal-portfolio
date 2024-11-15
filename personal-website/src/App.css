@@ -4,9 +4,9 @@
   --dark-gray: #222222;
   --hover: #403f3f;
   --border-gray: #919090;
-  --selected: #c9535b;
-  --selected-gradient: #7a1b21;
-  --default-gradient: #e3323e;
+  --selected: #50C878;
+  --selected-gradient: #405cd6;
+  --default-gradient: #50C878;
   --font-size: calc(0.5rem + 0.5vw);
   --svg-size: calc(0.25vw + 1.5rem);
 
