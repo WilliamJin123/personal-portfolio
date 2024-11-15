@@ -1,6 +1,7 @@
 @import url(../App.css);
 :root{
-    --padding: 0%;
+    --padding: 2px;
+    --border-radius: 5px;
 }
 .animations-main{
     width: 100%;
@@ -28,8 +29,8 @@
     font-size: 2vw;
 }
 .animation-menu svg{
-    width: 2vw;
-    height: 2vw;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 .animation-menu button{
     font-size: var(--font-size);
@@ -56,7 +57,7 @@
     
     width: 85%;
     height: fit-content;
-    padding: 0 var(--padding);
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -67,19 +68,71 @@
 .animation-window{
     width: 100%;
     position: relative;
-    border: 1px solid var(--border-gray);
+   
 }
+
+@property --angle{
+    syntax:"<angle>";
+    initial-value: 0deg;
+    inherits: false;
+    
+}
+
+@keyframes spin{
+    from{
+        --angle: 0deg;
+    }
+    to{
+        --angle: 360deg;
+    }
+}
+
+
+.fancy-border, .fancy-border::before{
+    content:'';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 0;
+    pointer-events: none;
+    background-size: 100% 100%;
+    background-image: conic-gradient(from var(--angle), 
+        var(--selected-gradient), var(--default-gradient), var(--selected-gradient)
+        );
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    animation: spin 10s linear infinite;
+   
+}
+.fancy-border::after{
+    content:'';
+    position: absolute;
+    height: calc(100% - var(--padding) * 2);
+    width: calc(100% - var(--padding) * 2);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    border-radius: var(--border-radius);
+    pointer-events: none;
+    background-color: var(--dark-gray);
+}
+.fancy-border::before{
+    filter: blur(1vw);
+    opacity: 0.5;
+    
+}
+
 
 .code-window{
     width: 100%;
     background-color: green;
-    position: relative;
 }
 .hidden{
     z-index: -10;
     position: absolute;
-    
-    
 }
 .visible{
     z-index: 10;

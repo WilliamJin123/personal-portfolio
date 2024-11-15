@@ -1,5 +1,5 @@
 import "./svg-hover.css"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, cloneElement } from "react"
 import { motion } from "motion/react"
 import { handleMouseMove } from "./svg-mouse-handlers"
 export default function SvgHover({ children, divRef, index, percentX, percentY, onTab, selected, svgRef}) {
@@ -47,7 +47,12 @@ export default function SvgHover({ children, divRef, index, percentX, percentY, 
 
             </svg>
 
-            {children}
+            {children.type === "svg"? 
+                cloneElement(children, {
+                    stroke: `url(#hoverGradient${index})`,
+                    fill: children.props.fill==="none"? "none" : `url(#hoverGradient${index})`
+                })
+            : children}
         </div>
     )
 }

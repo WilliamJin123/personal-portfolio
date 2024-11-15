@@ -1,4 +1,4 @@
-
+@import "./Animation-page.css";
 
 .slideshow{
     width: 100%;
@@ -14,7 +14,8 @@
     position: absolute;
     width: 100%;
     object-fit: cover;
-    
+    border-radius: var(--border-radius);
+    transform: scale(1);
 }
 .dimension-fill{
     width: 100%;

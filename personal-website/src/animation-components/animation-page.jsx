@@ -13,12 +13,12 @@ export default function Animations() {
 
             <h1>Animations</h1>
 
-            <Animation code={<></>} animation={<Slideshow />} />
+            <Animation code={<></>} animation={<Slideshow />} index={1} />
         </div>
     )
 }
 
-function Animation({ children, code, animation }) {
+function Animation({ children, code, animation, index }) {
     const [showAnim, setShowAnim] = useState(true)
     const animRef = useRef(null)
     const [dims, setDims] = useState([])
@@ -76,7 +76,7 @@ function Animation({ children, code, animation }) {
                         onMouseMove={(e) => handleMouseMove(e, onEye, setEyePercentX, setEyePercentY, eyeRef, eyeDim[0], eyeDim[1])}
                         > 
                         <SvgHover
-                            divRef={eyeRef} index="Eye" percentX={eyePercentX} percentY={eyePercentY} onTab={onEye} selected={showAnim} svgRef={eyeSvgRef}
+                            divRef={eyeRef} index={`Eye${index}`} percentX={eyePercentX} percentY={eyePercentY} onTab={onEye} selected={showAnim} svgRef={eyeSvgRef}
                         >
                             {AnimationSvgs.eyeSvg()} 
                         </SvgHover>
@@ -87,15 +87,21 @@ function Animation({ children, code, animation }) {
                         onMouseMove={(e) => handleMouseMove(e, onCode, setCodePercentX, setCodePercentY, codeRef, codeDim[0], codeDim[1])}
                         > 
                         <SvgHover
-                            divRef={codeRef} index="Code" percentX={codePercentX} percentY={codePercentY} onTab={onCode} selected={!showAnim} svgRef={codeSvgRef}
+                            divRef={codeRef} index={`Code${index}`} percentX={codePercentX} percentY={codePercentY} onTab={onCode} selected={!showAnim} svgRef={codeSvgRef}
                         >{AnimationSvgs.codeSvg()}</SvgHover> 
                         <span className="text">Code</span></button>
                 </div>
             </div>
-            <div className={`animation-window ${!showAnim ? 'hidden' : 'visible'}`} ref={animRef}>
+            <div style={{width:'100%', height:"fit-content", position:"relative", borderRadius:"5px"}}>
+                <div className={`animation-window ${!showAnim ? 'hidden' : 'visible'}`} ref={animRef}>
                 {animation}
+                
             </div>
             <div className={`code-window ${showAnim ? 'hidden' : 'visible'}`} style={{ width: dims[0], height: dims[1] }}>{code}</div>
+            <div className="fancy-border"></div>
+            </div>
+            
+            
         </div>
 
 
