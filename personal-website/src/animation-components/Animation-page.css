@@ -71,59 +71,7 @@
    
 }
 
-@property --angle{
-    syntax:"<angle>";
-    initial-value: 0deg;
-    inherits: false;
-    
-}
 
-@keyframes spin{
-    from{
-        --angle: 0deg;
-    }
-    to{
-        --angle: 360deg;
-    }
-}
-
-
-.fancy-border, .fancy-border::before{
-    content:'';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: 0;
-    pointer-events: none;
-    background-size: 100% 100%;
-    background-image: conic-gradient(from var(--angle), 
-        var(--selected-gradient), var(--default-gradient), var(--selected-gradient)
-        );
-    padding: var(--padding);
-    border-radius: var(--border-radius);
-    animation: spin 10s linear infinite;
-   
-}
-.fancy-border::after{
-    content:'';
-    position: absolute;
-    height: calc(100% - var(--padding) * 2);
-    width: calc(100% - var(--padding) * 2);
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    border-radius: var(--border-radius);
-    pointer-events: none;
-    background-color: var(--dark-gray);
-}
-.fancy-border::before{
-    filter: blur(1vw);
-    opacity: 0.5;
-    
-}
 
 
 .code-window{

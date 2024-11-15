@@ -5,6 +5,8 @@ import Slideshow from "./img-slideshow"
 import { AnimationSvgs } from "./Animation-svgs"
 import SvgHover from "../custom-svgs/svg-hover"
 import { handleMouseEnter, handleMouseLeave, handleMouseMove } from "../custom-svgs/svg-mouse-handlers"
+import Border from "./Fancy-border"
+
 export default function Animations() {
 
 
@@ -99,6 +101,7 @@ function Animation({ children, code, animation, index }) {
             </div>
             <div className={`code-window ${showAnim ? 'hidden' : 'visible'}`} style={{ width: dims[0], height: dims[1] }}>{code}</div>
             <div className="fancy-border"></div>
+            <Border/>
             </div>
             
             
