@@ -1,15 +1,15 @@
 :root {
   --black: #000000;
   --white: #FFFFFF;
-  --dark-gray: #222222;
+  --dark-gray: #121212;
   --hover: #403f3f;
-  --border-gray: #919090;
+  --light-gray: #919090;
   --selected: #50C878;
   --selected-gradient: #405cd6;
   --default-gradient: #50C878;
   --font-size: calc(0.5rem + 0.5vw);
   --svg-size: calc(0.25vw + 1.5rem);
-
+  --text-transition: 0.25s;
 }
 
 html,
@@ -23,10 +23,16 @@ body {
   justify-content: center;
   align-items: flex-end;
   overflow-x: hidden;
+  
 }
+
 svg{
   width: var(--svg-size);
   height: var(--svg-size);
+
+}
+stop{
+  transition: stop-color var(--text-transition) ease;
 }
 
 button {
@@ -57,5 +63,5 @@ a {
 }
 
 .border-right {
-  border-right: 0.1rem solid var(--border-gray);
+  border-right: 0.1rem solid var(--light-gray);
 }

@@ -26,6 +26,7 @@ export default function App() {
           <Routes>
           {/* <Route path="/" element={}/> */}
           <Route path="/animations" element={<Animations/>} />
+          <Route path="/react" element={<div></div>} />
         </Routes>
        
         

@@ -10,12 +10,18 @@ import Border from "./Fancy-border"
 export default function Animations() {
 
 
+    const itemList = [
+        {code: () => (<></>), animation: () => (<Slideshow />)}
+    ]
+
     return (
         <div className="animations-main">
 
             <h1>Animations</h1>
-
-            <Animation code={<></>} animation={<Slideshow />} index={1} />
+            {itemList.map((item, index) => (
+                <Animation code={item.code()} animation = {item.animation()} index={index}/>
+            ))}
+            
         </div>
     )
 }
@@ -82,7 +88,7 @@ function Animation({ children, code, animation, index }) {
                         >
                             {AnimationSvgs.eyeSvg()} 
                         </SvgHover>
-                        <span className="text">View</span></button>
+                        <span className={`text ${showAnim? "in-view" : onEye? "hovered": ""}`}>View</span></button>
                     <button onClick={() => setShowAnim(false)} ref={codeRef}
                         onMouseEnter={() => handleMouseEnter(setOnCode)}
                         onMouseLeave={() => handleMouseLeave(setOnCode)}
@@ -91,7 +97,7 @@ function Animation({ children, code, animation, index }) {
                         <SvgHover
                             divRef={codeRef} index={`Code${index}`} percentX={codePercentX} percentY={codePercentY} onTab={onCode} selected={!showAnim} svgRef={codeSvgRef}
                         >{AnimationSvgs.codeSvg()}</SvgHover> 
-                        <span className="text">Code</span></button>
+                        <span className={`text ${!showAnim? "in-view" : onCode? "hovered" : ""}`}>Code</span></button>
                 </div>
             </div>
             <div style={{width:'100%', height:"fit-content", position:"relative", borderRadius:"5px"}}>

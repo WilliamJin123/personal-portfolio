@@ -33,14 +33,16 @@ export default function SvgHover({ children, divRef, index, percentX, percentY, 
                         id={`hoverGradient${index}`}
                         key={index}
                         gradientUnits="userSpaceOnUse"
-                        r={`${adjust*100}%`}
+                        r={`${adjust * 120}%`}
                         viewBox="0 0 24 24"
                         cx={`${adjustedPercentX}%`}
                         cy={`${adjustedPercentY}%`}
 
                     >
                         {onTab && <stop offset="0%" stopColor={selected ? 'var(--selected-gradient)' : 'var(--default-gradient)'} />}
-                        <stop offset={1} stopColor="#FFFFFF" />
+                        <stop offset={1} stopColor= {
+                            selected? "var(--selected)" : 
+                                onTab? "var(--white)" : "var(--light-gray)"} />
                     </radialGradient>
                 </defs>
                     

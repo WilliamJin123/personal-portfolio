@@ -23,7 +23,7 @@ export default function Sidebar() {
                 hidden: { width: '4.5vw' },
                 visible: { width: '16.5vw' }
             }}
-            initial="hidden"
+            initial={false}
             animate={expanded ? "visible" : "hidden"}
             transition={{ delay: 0.125 }}
         >
@@ -78,12 +78,12 @@ function Tab({ icon, desc, link, expanded, selected, handleClick, index }) {
     
     return (
         <Link to={link} onClick={handleClick}>
-            <motion.li layout className={`tab ${selected ? "selected" : ""}`} ref={tabRef}
+            <motion.li className={`tab ${selected ? "selected" : ""}`} ref={tabRef}
                 variants={{
                     hidden: { width: '3vw' },
                     visible: { width: '15vw' }
                 }}
-                initial="hidden"
+                initial={false}
                 animate={expanded ? "visible" : "hidden"}
                 transition={{ delay: 0.125 }}
                 onMouseEnter={() => handleMouseEnter(setOnTab)}
@@ -92,7 +92,7 @@ function Tab({ icon, desc, link, expanded, selected, handleClick, index }) {
 
             >
                 
-                    <motion.span layout className="icon">
+                    <motion.span className="icon">
                         <SvgHover divRef={tabRef} index={index} percentX={percentX} percentY={percentY} onTab={onTab} selected={selected} svgRef={svgRef}>
                             {icon()}
                         </SvgHover>

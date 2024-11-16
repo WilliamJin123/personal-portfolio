@@ -34,19 +34,24 @@
         padding: 0.5vw 0.5vw 0.5vw calc( (3vw - var(--svg-size)) / 2);
         margin: 0.5vh 0;
         border-radius: 8px;
-        transition: background-color 0.25s;
+        transition: background-color var(--text-transition);
+        transition: color var(--text-transition) ease;
         overflow:hidden;
         flex-wrap: nowrap;
+        color: var(--light-gray);
     }
 
     .selected{
-        background-color: var(--selected);
+        color: var(--selected);
     }
 
-    .tab:not(.selected):hover {
+    .tab:hover {
         background-color: var(--hover);
+        
     }
-
+    .tab:not(.selected):hover{
+        color: var(--white);
+    }
     .icon{
         display: flex;
         width: 100%;
@@ -57,6 +62,7 @@
 
     .desc{
         white-space: nowrap;
+        
     }
     .expand-btn{
         
