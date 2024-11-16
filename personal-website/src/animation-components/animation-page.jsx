@@ -19,7 +19,7 @@ export default function Animations() {
 
             <h1>Animations</h1>
             {itemList.map((item, index) => (
-                <Animation code={item.code()} animation = {item.animation()} index={index}/>
+                <Animation code={item.code()} animation = {item.animation()} index={index} key={index}/>
             ))}
             
         </div>

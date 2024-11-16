@@ -1,12 +1,12 @@
 
 export function handleMouseEnter(setState){
     setState(true)
-    console.log('hovered')
+
 }
 
 export function handleMouseLeave(setState){
     setState(false)
-    console.log('exit hovered')
+
 }
 
 export function handleMouseMove(event, onSvg, setPercentX, setPercentY, divRef, svgWidth, svgHeight) {

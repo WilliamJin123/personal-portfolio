@@ -71,7 +71,7 @@ function Tab({ icon, desc, link, expanded, selected, handleClick, index }) {
 
             setSvgWidth(rect.width)
             setSvgHeight(rect.height)
-            console.log(svgHeight)
+
         }
     }, [expanded])
 

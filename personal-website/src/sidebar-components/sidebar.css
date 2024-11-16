@@ -35,7 +35,7 @@
         margin: 0.5vh 0;
         border-radius: 8px;
         transition: background-color var(--text-transition);
-        transition: color var(--text-transition) ease;
+        transition: color var(--text-transition) ease, background-color var(--text-transition) ease;
         overflow:hidden;
         flex-wrap: nowrap;
         color: var(--light-gray);
