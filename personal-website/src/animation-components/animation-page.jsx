@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react"
 import "./Animation-page.css"
 import Slideshow from "./img-slideshow"
 import { AnimationSvgs } from "./Animation-svgs"
+
 import SvgHover from "../custom-svgs/svg-hover"
 import { handleMouseEnter, handleMouseLeave, handleMouseMove } from "../custom-svgs/svg-mouse-handlers"
 import Border from "./Fancy-border"
@@ -11,18 +12,21 @@ export default function Animations() {
 
 
     const itemList = [
-        {code: () => (<></>), animation: () => (<Slideshow />)}
+        { code: () => (<></>), animation: () => (<Slideshow />) }
     ]
 
     return (
-        <div className="animations-main">
 
+
+        <div className="animations-main">
             <h1>Animations</h1>
             {itemList.map((item, index) => (
-                <Animation code={item.code()} animation = {item.animation()} index={index} key={index}/>
+                <Animation code={item.code()} animation={item.animation()} index={index} key={index} />
             ))}
-            
+
         </div>
+
+
     )
 }
 
@@ -33,7 +37,7 @@ function Animation({ children, code, animation, index }) {
     useEffect(() => {
         const handleResize = () => {
             if (animRef.current) {
-                
+
                 const width = animRef.current.offsetWidth
                 const height = animRef.current.offsetHeight
                 setDims([width, height])
@@ -82,35 +86,35 @@ function Animation({ children, code, animation, index }) {
                         onMouseEnter={() => handleMouseEnter(setOnEye)}
                         onMouseLeave={() => handleMouseLeave(setOnEye)}
                         onMouseMove={(e) => handleMouseMove(e, onEye, setEyePercentX, setEyePercentY, eyeRef, eyeDim[0], eyeDim[1])}
-                        > 
+                    >
                         <SvgHover
                             divRef={eyeRef} index={`Eye${index}`} percentX={eyePercentX} percentY={eyePercentY} onTab={onEye} selected={showAnim} svgRef={eyeSvgRef}
                         >
-                            {AnimationSvgs.eyeSvg()} 
+                            {AnimationSvgs.eyeSvg()}
                         </SvgHover>
-                        <span className={`text ${showAnim? "in-view" : onEye? "hovered": ""}`}>View</span></button>
+                        <span className={`text ${showAnim ? "in-view" : onEye ? "hovered" : ""}`}>View</span></button>
                     <button onClick={() => setShowAnim(false)} ref={codeRef}
                         onMouseEnter={() => handleMouseEnter(setOnCode)}
                         onMouseLeave={() => handleMouseLeave(setOnCode)}
                         onMouseMove={(e) => handleMouseMove(e, onCode, setCodePercentX, setCodePercentY, codeRef, codeDim[0], codeDim[1])}
-                        > 
+                    >
                         <SvgHover
                             divRef={codeRef} index={`Code${index}`} percentX={codePercentX} percentY={codePercentY} onTab={onCode} selected={!showAnim} svgRef={codeSvgRef}
-                        >{AnimationSvgs.codeSvg()}</SvgHover> 
-                        <span className={`text ${!showAnim? "in-view" : onCode? "hovered" : ""}`}>Code</span></button>
+                        >{AnimationSvgs.codeSvg()}</SvgHover>
+                        <span className={`text ${!showAnim ? "in-view" : onCode ? "hovered" : ""}`}>Code</span></button>
                 </div>
             </div>
-            <div style={{width:'100%', height:"fit-content", position:"relative", borderRadius:"5px"}}>
+            <div style={{ width: '100%', height: "fit-content", position: "relative", borderRadius: "5px" }}>
                 <div className={`animation-window ${!showAnim ? 'hidden' : 'visible'}`} ref={animRef}>
-                {animation}
-                
+                    {animation}
+
+                </div>
+                <div className={`code-window ${showAnim ? 'hidden' : 'visible'}`} style={{ width: dims[0], height: dims[1] }}>{code}</div>
+                <div className="fancy-border"></div>
+                <Border />
             </div>
-            <div className={`code-window ${showAnim ? 'hidden' : 'visible'}`} style={{ width: dims[0], height: dims[1] }}>{code}</div>
-            <div className="fancy-border"></div>
-            <Border/>
-            </div>
-            
-            
+
+
         </div>
 
 
