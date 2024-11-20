@@ -1,13 +1,14 @@
 import { motion } from "motion/react"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, lazy, Suspense } from "react"
 import "./Animation-page.css"
 import Slideshow from "./img-slideshow"
 import { AnimationSvgs } from "./Animation-svgs"
-
+import { ReactLenis } from "lenis/react"
 import SvgHover from "../custom-svgs/svg-hover"
 import { handleMouseEnter, handleMouseLeave, handleMouseMove } from "../custom-svgs/svg-mouse-handlers"
-import Border from "./Fancy-border"
 
+
+const Border = lazy(() => import("./Fancy-border"))
 export default function Animations() {
 
 
@@ -17,14 +18,14 @@ export default function Animations() {
 
     return (
 
-
+            
         <div className="animations-main">
             <h1>Animations</h1>
             {itemList.map((item, index) => (
                 <Animation code={item.code()} animation={item.animation()} index={index} key={index} />
             ))}
-
         </div>
+        
 
 
     )
@@ -110,8 +111,9 @@ function Animation({ children, code, animation, index }) {
 
                 </div>
                 <div className={`code-window ${showAnim ? 'hidden' : 'visible'}`} style={{ width: dims[0], height: dims[1] }}>{code}</div>
-                <div className="fancy-border"></div>
-                <Border />
+                <Suspense>
+                    <Border/>
+                </Suspense>
             </div>
 
 

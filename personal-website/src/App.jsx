@@ -15,12 +15,14 @@ export default function App() {
   return (
     
     <div>
+      <ReactLenis root>
+
       <Sidebar />
       <Suspense fallback={<Loading/>}>
-
+      
       <motion.div
         initial={false}
-        animate={{ width: expanded ? "82.5vw" : "94.5vw", transition: { delay: 0.125 } }}
+        animate={{ width: expanded ? "83.5vw" : "95.5vw", transition: { delay: 0.125 } }}
         className='main-content'>
         
           <Routes>
@@ -29,9 +31,9 @@ export default function App() {
           <Route path="/react" element={<div></div>} />
         </Routes>
       </motion.div>
-
+      
       </Suspense>
-
+      </ReactLenis>
     </div>
 
   )

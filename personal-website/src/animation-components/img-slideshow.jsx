@@ -4,7 +4,6 @@ import { images } from "./img-list"
 import { useState, useEffect} from "react";
 
 
-
 const swipeThreshold = 10000
 const swipePower = (offset, velocity) => Math.abs(offset) * velocity
 
@@ -59,6 +58,7 @@ export default function Slideshow() {
             <div className="dimension-fill"></div>
             <AnimatePresence initial={false} custom={dir}>
                 <motion.img
+                  
                     key = {page}
                     custom={dir}
                     variants={imageVariants}

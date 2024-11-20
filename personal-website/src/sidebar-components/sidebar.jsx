@@ -85,7 +85,7 @@ function Tab({ icon, desc, link, expanded, selected, handleClick, index }) {
                 }}
                 initial={false}
                 animate={expanded ? "visible" : "hidden"}
-                transition={{ delay: 0.125 }}
+                transition={{delay: 0.125}}
                 onMouseEnter={() => handleMouseEnter(setOnTab)}
                 onMouseLeave={() => handleMouseLeave(setOnTab)}
                 onMouseMove={(e) => handleMouseMove(e, onTab, setPercentX, setPercentY, tabRef, svgWidth, svgHeight)}

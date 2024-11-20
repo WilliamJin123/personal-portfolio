@@ -88,6 +88,7 @@
 .hidden{
     z-index: -10;
     position: absolute;
+    top: 0;
 }
 .visible{
     z-index: 10;
