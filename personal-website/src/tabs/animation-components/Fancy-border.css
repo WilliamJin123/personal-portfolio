@@ -1,5 +1,5 @@
 @import url('./Animation-page.css');
-@import url('../App.css');
+@import url('../../App.css');
 @property --angle{
     syntax:"<angle>";
     initial-value: 0deg;

@@ -5,9 +5,11 @@ import { Routes, Route, } from 'react-router-dom'
 import Loading from './Loading'
 import { ExpandedContextProvider, useExpanded } from './Expanded_context'
 import { motion } from 'framer-motion'
-import { ReactLenis } from "lenis/react"
+// import { ReactLenis } from "lenis/react"
+import Learning from './tabs/learning-components/Learning-page'
 
-const Animations = lazy(() => import('./animation-components/Animation-page'))
+
+const Animations = lazy(() => import('./tabs/animation-components/Animation-page'))
 
 
 export default function App() {
@@ -15,7 +17,7 @@ export default function App() {
   return (
     
     <div>
-      <ReactLenis root>
+      {/* <ReactLenis root> */}
 
       <Sidebar />
       <Suspense fallback={<Loading/>}>
@@ -25,15 +27,16 @@ export default function App() {
         animate={{ width: expanded ? "83.5vw" : "95.5vw", transition: { delay: 0.125 } }}
         className='main-content'>
         
-          <Routes>
+          <Routes >
           {/* <Route path="/" element={}/> */}
           <Route path="/animations" element={<Animations/>} />
           <Route path="/react" element={<div></div>} />
+          <Route path="/learning" element={<Learning/>} />
         </Routes>
       </motion.div>
       
       </Suspense>
-      </ReactLenis>
+      {/* </ReactLenis> */}
     </div>
 
   )

@@ -1,4 +1,4 @@
-@import url(../App.css);
+@import url(../../App.css);
 :root{
     --padding: 2px;
     --border-radius: 5px;
@@ -12,8 +12,8 @@
     align-items: center;
     flex-direction: column;
     position: relative;
-    padding: 50vh 0;
-    row-gap: 50vh;
+    padding: 10vh 0;
+    row-gap: 10vh;
     
 }
 

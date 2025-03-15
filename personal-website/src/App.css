@@ -1,15 +1,18 @@
+
 :root {
   --black: #000000;
   --white: #FFFFFF;
   --dark-gray: #121212;
+  --dark-hover: #191919;
   --hover: #353535;
   --light-gray: #919090;
   --selected: #50C878;
+  --dark-selected: #43a865;
   --selected-gradient: #405cd6;
   --default-gradient: #50C878;
   --font-size: calc(0.5rem + 0.5vw);
   --svg-size: calc(0.25vw + 1.5rem);
-  --text-transition: 0.5s;
+  --text-transition: 0.45s;
 }
 
 
@@ -17,7 +20,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: var(--black);
-  font-family: 'Work Sans', 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,20 +29,40 @@ body {
   
 }
 
+b{
+  font-weight: 600;
+}
+li{
+
+}
+
+@property --scroll-bar-color {
+  syntax: '<color>';
+  initial-value: #43a865;
+  inherits: true;
+}
+
 
 ::-webkit-scrollbar{
   width: 5px;
+  
   background-color: var(--dark-gray);
 }
 ::-webkit-scrollbar-thumb{
-  background-color: var(--scrollColor);
+  background: var(--scroll-bar-color);
   border-radius: 5px;
-  background-color: color-mix(in srgb, var(--selected-gradient) 25%, color-mix(in srgb, var(--default-gradient) 25%, var(--dark-gray) 75%) 75%);
+  /* background-color: color-mix(in srgb, var(--selected-gradient) 25%, color-mix(in srgb, var(--default-gradient) 25%, var(--dark-gray) 75%) 75%); */
 }
 ::-webkit-scrollbar-thumb:hover{
   /* background-image: linear-gradient(to bottom, var(--default-gradient), var(--selected-gradient)); */
-  --scrollColor: linear-gradient(to bottom, var(--default-gradient), var(--selected-gradient));
+  cursor:pointer;
+  
+  
+  
+  --scroll-bar-color: var(--selected);
+
 }
+
 
 svg{
   width: var(--svg-size);
@@ -52,8 +75,8 @@ stop{
 
 button {
   background-color: inherit;
-  outline: none;
   border: none;
+  outline: none;
   font-family: inherit;
   display: flex;
   align-items: center;
@@ -61,6 +84,10 @@ button {
   box-sizing: border-box;
   color: var(--white);
 }
+
+/* button:not(:focus){
+  outline: none;
+} */
 
 a {
   text-decoration: none;
@@ -75,6 +102,7 @@ a {
 .main-content {
   height: 100vh;
   box-sizing: border-box;
+  transition: --scroll-bar-color 5s ease-in-out;
 }
 
 .border-right {

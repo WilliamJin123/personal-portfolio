@@ -1,5 +1,5 @@
 import "./sidebar.css"
-import { useState, useRef, useEffect} from "react"
+import { useState, useRef, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { iconList } from "./icons"
 import { AnimatePresence, motion } from "motion/react"
@@ -16,6 +16,7 @@ const enterVariants = {
 }
 export default function Sidebar() {
     const { expanded, toggleExpanded } = useExpanded()
+    const [isTapped, setIsTapped] = useState(false)
     const [selected, setSelected] = useState(iconList.findIndex(item => item.link === location.pathname) || 0)
     return (
         <motion.div className="sidebar"
@@ -35,8 +36,12 @@ export default function Sidebar() {
                         handleClick={() => setSelected(index)} selected={selected === index} key={index} icon={item.icon} desc={item.desc} link={item.link} expanded={expanded} index={index} />
                 ))}
             </ul>
-            <button className="expand-btn" onClick={toggleExpanded}>
-                <motion.span animate={{ rotate: expanded ? '-180deg' : 0 }} transition={{ delay: 0.2, duration: 0.1 }}>{expandSvg()}</motion.span>
+            <motion.button className="expand-btn" whileHover={{backgroundColor:"var(--dark-hover)"}}onClick={toggleExpanded} onMouseDown={() => setIsTapped(true)} onMouseUp={() => setIsTapped(false)} onMouseLeave={() => setIsTapped(false)}>
+                <motion.span animate={{ rotate: expanded ? '-180deg' : 0 }} transition={{ delay: 0.2, duration: 0.1 }} style={{
+                    scale: isTapped ? 1.025 : 1, transitionProperty: "scale",
+                    transitionDuration: "0.1s",
+                    transitionTimingFunction: "ease-in-out"
+                }}>{expandSvg()}</motion.span>
                 <AnimatePresence>
                     {expanded && (
                         <motion.span
@@ -45,11 +50,16 @@ export default function Sidebar() {
                             animate="visible"
                             exit="exit"
                             transition={{ delay: 0.2 }}
+                            style={{
+                                scale: isTapped ? 1.05 : 1, transitionProperty: "scale",
+                                transitionDuration: "0.1s",
+                                transitionTimingFunction: "ease-in-out"
+                            }}
                         >Hide</motion.span>
                     )}
                 </AnimatePresence>
 
-            </button>
+            </motion.button>
         </motion.div>
     )
 }
@@ -75,39 +85,40 @@ function Tab({ icon, desc, link, expanded, selected, handleClick, index }) {
         }
     }, [expanded])
 
-    
+
     return (
-        <Link to={link} onClick={handleClick}>
-            <motion.li className={`tab ${selected ? "selected" : ""}`} ref={tabRef}
+        <Link to={link} onClick={handleClick} className="rounded-[8px] my-[1.5vh]">
+            <motion.li  className={`tab ${selected ? "selected" : ""}`} ref={tabRef}
                 variants={{
                     hidden: { width: '3vw' },
                     visible: { width: '15vw' }
                 }}
                 initial={false}
                 animate={expanded ? "visible" : "hidden"}
-                transition={{delay: 0.125}}
+                transition={{ delay: 0.125 }}
                 onMouseEnter={() => handleMouseEnter(setOnTab)}
                 onMouseLeave={() => handleMouseLeave(setOnTab)}
                 onMouseMove={(e) => handleMouseMove(e, onTab, setPercentX, setPercentY, tabRef, svgWidth, svgHeight)}
-
+                whileTap={{ scale: expanded ? 1.025 : 1.05, transition: { duration: 0.1, ease: 'easeInOut' } }}
+                tabIndex={-1}
             >
-                
-                    <motion.span className="icon">
-                        <SvgHover divRef={tabRef} index={index} percentX={percentX} percentY={percentY} onTab={onTab} selected={selected} svgRef={svgRef}>
-                            {icon()}
-                        </SvgHover>
-                        
-                        </motion.span>
 
-                    <AnimatePresence>
-                        {expanded && (<motion.span className="desc"
-                            variants={enterVariants}
-                            transition={{ delay: 0.2 }}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
-                        >{desc}</motion.span>)}
-                    </AnimatePresence>
+                <motion.span className="icon">
+                    <SvgHover divRef={tabRef} index={index} percentX={percentX} percentY={percentY} onTab={onTab} selected={selected} svgRef={svgRef}>
+                        {icon()}
+                    </SvgHover>
+
+                </motion.span>
+
+                <AnimatePresence>
+                    {expanded && (<motion.span className="desc"
+                        variants={enterVariants}
+                        transition={{ delay: 0.2 }}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                    >{desc}</motion.span>)}
+                </AnimatePresence>
 
 
             </motion.li>

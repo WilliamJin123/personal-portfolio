@@ -1,25 +1,26 @@
 import { motion } from "motion/react"
 import { useState, useRef, useEffect, lazy, Suspense } from "react"
 import "./Animation-page.css"
-import Slideshow from "./img-slideshow"
 import { AnimationSvgs } from "./Animation-svgs"
-import { ReactLenis } from "lenis/react"
-import SvgHover from "../custom-svgs/svg-hover"
-import { handleMouseEnter, handleMouseLeave, handleMouseMove } from "../custom-svgs/svg-mouse-handlers"
+
+import SvgHover from "../../custom-svgs/svg-hover"
+import { handleMouseEnter, handleMouseLeave, handleMouseMove } from "../../custom-svgs/svg-mouse-handlers"
 
 
 const Border = lazy(() => import("./Fancy-border"))
+const Slideshow = lazy(() => import("./img-slideshow/img-slideshow"))
 export default function Animations() {
 
 
     const itemList = [
-        { code: () => (<></>), animation: () => (<Slideshow />) }
+        { code: () => (<></>), animation: () => (<Slideshow />) },
+
     ]
 
     return (
 
             
-        <div className="animations-main">
+        <div className="animations-main ">
             <h1>Animations</h1>
             {itemList.map((item, index) => (
                 <Animation code={item.code()} animation={item.animation()} index={index} key={index} />
